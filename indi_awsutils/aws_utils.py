@@ -1,4 +1,4 @@
-# awsutils/aws_utils.py
+# indi_awsutils/aws_utils.py
 #
 # Contributing authors:
 # Daniel Clark

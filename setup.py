@@ -13,10 +13,10 @@ package
 from distutils.core import setup
 
 # Use disutils' setup function to install the package
-setup(name='AWSUtils',
+setup(name='INDI_AWSUtils',
       version='0.0.1',
-      description='AWS Python utilities',
+      description='AWS Python utilities developed by FCP-INDI',
       author='Daniel Clark',
       author_email='daniel.clark@childmind.org',
       url='https://github.com/FCP-INDI/AWSUtils',
-      packages=['awsutils'])
+      packages=['indi_awsutils'])

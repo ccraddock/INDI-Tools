@@ -1,4 +1,4 @@
-# awsutils/__init__.py
+# indi_awsutils/__init__.py
 #
 # Contibuting authors (please append):
 # Daniel Clark

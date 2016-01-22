@@ -1,4 +1,4 @@
-# awsutils/fetch_creds.py
+# indi_awsutils/fetch_creds.py
 #
 # Contributing authors (please append):
 # Daniel Clark
