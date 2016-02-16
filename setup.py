@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# AWSUtils/setup.py
+# INDI-Tools/setup.py
 #
 # Author: Daniel Clark, 2016
 
@@ -13,10 +13,10 @@ package
 from distutils.core import setup
 
 # Use disutils' setup function to install the package
-setup(name='INDI_AWSUtils',
+setup(name='INDI-Tools',
       version='0.0.1',
-      description='AWS Python utilities developed by FCP-INDI',
+      description='Python utilities developed by FCP-INDI',
       author='Daniel Clark',
       author_email='daniel.clark@childmind.org',
       url='https://github.com/FCP-INDI/AWSUtils',
-      packages=['indi_awsutils'])
+      packages=['indi_aws', 'indi_schedulers'])
