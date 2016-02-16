@@ -55,6 +55,7 @@ def cluster_job_submit():
 
     # Populate rest of dictionary
     config_dict['env_arr_idx'] = env_arr_idx
+    config_dict['run_cmd'] = 'echo "Running task: %s"' % env_arr_idx
 
     # Populate string from config dict values
     batch_file_contents = batch_file_contents % config_dict
