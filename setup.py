@@ -18,5 +18,5 @@ setup(name='INDI-Tools',
       description='Python utilities developed by FCP-INDI',
       author='Daniel Clark',
       author_email='daniel.clark@childmind.org',
-      url='https://github.com/FCP-INDI/AWSUtils',
+      url='https://github.com/FCP-INDI/INDI-Tools',
       packages=['indi_aws', 'indi_schedulers'])
