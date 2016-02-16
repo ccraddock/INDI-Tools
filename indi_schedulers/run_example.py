@@ -14,10 +14,14 @@ def cluster_job_submit():
 
     # Import packages
     import commands
+    import getpass
+    import os
+    import re
+    import time
     from indi_schedulers import cluster_templates
 
     # Init variables
-    timestamp = str(strftime("%Y_%m_%d_%H_%M_%S"))
+    timestamp = str(time.strftime("%Y_%m_%d_%H_%M_%S"))
     job_scheduler = 'sge' # could also be 'slurm' or 'pbs'
     cluster_files_dir = '/home/ubuntu/cluster_logs'
 
