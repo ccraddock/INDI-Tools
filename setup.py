@@ -20,4 +20,4 @@ setup(name='INDI-Tools',
       author_email='daniel.clark@childmind.org',
       url='https://github.com/FCP-INDI/INDI-Tools',
       packages=find_packages(exclude=['test*']),
-      install_requires=['botocore', 'boto3', 'cx_Oracle'])
+      install_requires=['botocore', 'boto3'])
