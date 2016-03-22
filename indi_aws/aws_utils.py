@@ -1,7 +1,5 @@
 # indi_aws/aws_utils.py
 #
-# Contributing authors:
-# Daniel Clark
 
 '''
 This module contains functions which assist in interacting with AWS
@@ -11,12 +9,13 @@ services, including uploading/downloading data and file checking.
 # Class to track percentage of S3 file upload
 class ProgressPercentage(object):
     '''
-    Callable class instsance (via __call__ method) that displays
+    Callable class instance (via __call__ method) that displays
     upload percentage of a file to S3
     '''
 
     def __init__(self, filename):
         '''
+        Init the percentage tracker with a filename
         '''
 
         # Import packages
@@ -36,6 +35,7 @@ class ProgressPercentage(object):
 
     def __call__(self, bytes_amount):
         '''
+        Call to print the current percentage complete of transfer
         '''
 
         # Import packages
@@ -388,54 +388,3 @@ def s3_upload(bucket, local_s3_tuple, make_public=False, encrypt=False):
 
     # Print when finished
     print 'Done!'
-
-
-# Test write-access to bucket first
-def test_bucket_access(creds_path, output_directory, subject_id):
-    '''
-    '''
-
-    # Import packages
-    import os
-    import botocore.exceptions as bexc
-    from CPAC.AWS import fetch_creds
-
-    # Init variables
-    s3_str = 's3://'
-    test_file = '/tmp/test-output.txt'
-
-    # Explicitly lower-case the "s3"
-    if output_directory.lower().startswith(s3_str):
-        out_dir_sp = output_directory.split('/')
-        out_dir_sp[0] = out_dir_sp[0].lower()
-        output_directory = '/'.join(out_dir_sp)
-
-    # Get bucket name
-    bucket_name = output_directory.replace(s3_str, '').split('/')[0]
-
-    # Get bucket
-    bucket = fetch_creds.return_bucket(creds_path, bucket_name)
-
-    # Create local file
-    with open(test_file, 'w') as f:
-        f.write('test123')
-    f.close()
-
-    # Formulate test ouput key in bucket path output directory
-    rel_key_path = output_directory.replace(\
-                   os.path.join(s3_str, bucket_name), '').lstrip('/')
-    write_test_key = os.path.join(rel_key_path, 'test-output_%s.txt' % subject_id)
-
-    # Attempt a write to bucket
-    try:
-        bucket.upload_file(test_file, write_test_key)
-        print 'Confirmed S3 write access for CPAC output!'
-        test_key = bucket.Object(key=write_test_key)
-        test_key.delete()
-        s3_write_access = True
-    # Otherwise we set the access flag to false
-    except bexc.ClientError:
-        s3_write_access = False
-
-    # Return the access flag
-    return s3_write_access

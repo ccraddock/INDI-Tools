@@ -10,13 +10,14 @@ package
 '''
 
 # Import packages
-from distutils.core import setup
+from setuptools import find_packages, setup
 
 # Use disutils' setup function to install the package
 setup(name='INDI-Tools',
-      version='0.0.1',
+      version='0.0.2',
       description='Python utilities developed by FCP-INDI',
       author='Daniel Clark',
       author_email='daniel.clark@childmind.org',
       url='https://github.com/FCP-INDI/INDI-Tools',
-      packages=['indi_aws', 'indi_schedulers'])
+      packages=find_packages(exclude=['test*']),
+      install_requires=['botocore', 'boto3', 'cx_Oracle'])

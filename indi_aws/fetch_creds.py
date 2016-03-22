@@ -1,7 +1,5 @@
 # indi_aws/fetch_creds.py
 #
-# Contributing authors (please append):
-# Daniel Clark
 
 '''
 This module contains functions which return sensitive information from 
@@ -189,7 +187,7 @@ def return_rds_vars(creds_path):
         username in the first row, 'db_passwd'= followed by oracle db
         password in the second row, 'db_host=' followed by oracle db
         hostname in the third row, 'db_port=' followed by oracle db
-        portname in the fourth row, and 'db_sid' followed by oracle_db
+        portname in the fourth row, and 'db_sid=' followed by oracle_db
         serviceID in the fifth row
 
     Returns

@@ -1,4 +1,5 @@
-# INDI-Tools
+INDI-Tools
+==========
 Various tools developed for ongoing projects under the FCP-INDI organization
 
 indi_aws

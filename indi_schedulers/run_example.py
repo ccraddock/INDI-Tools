@@ -1,6 +1,5 @@
 # indi_schedulers/run_example.py
 #
-# Author: Daniel Clark, 2016
 
 '''
 Example module showing how to create and submit a batch file for
@@ -8,8 +7,18 @@ running a job via a cluster job scheduler
 '''
 
 # Function to submit a job to the scheduler
-def cluster_job_submit():
+def cluster_job_submit(run_cmd=None):
     '''
+    Function to utilize the cluster templates from cluster_templates.py
+    and submit a command on a PBS, SGE, or SLURM cluster
+
+    Parameters
+    ----------
+    run_cmd : string (optional); default=None
+        command string to execute a process; should be indexed by the
+        environment task array id for the cluster configuration of
+        interest. For example, for a command to run in an SGE cluster:
+        run_cmd='echo "I'm running task $SGE_TASK_ID!"'
     '''
 
     # Import packages
@@ -23,7 +32,7 @@ def cluster_job_submit():
     # Init variables
     timestamp = str(time.strftime("%Y_%m_%d_%H_%M_%S"))
     job_scheduler = 'sge' # could also be 'slurm' or 'pbs'
-    cluster_files_dir = '/home/ubuntu/cluster_logs'
+    cluster_files_dir = os.path.join(os.path.expanduser('~'), 'cluster_logs')
 
     # Batch file variables
     shell = commands.getoutput('echo $SHELL')
@@ -59,7 +68,9 @@ def cluster_job_submit():
 
     # Populate rest of dictionary
     config_dict['env_arr_idx'] = env_arr_idx
-    config_dict['run_cmd'] = 'echo "Running task: %s"' % env_arr_idx
+    if not run_cmd:
+        run_cmd = 'echo "Running task: %s"' % env_arr_idx
+    config_dict['run_cmd'] = run_cmd
 
     # Populate string from config dict values
     batch_file_contents = batch_file_contents % config_dict
