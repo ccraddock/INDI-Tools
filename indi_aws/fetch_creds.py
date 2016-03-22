@@ -97,8 +97,7 @@ def return_bucket(creds_path, bucket_name):
         # Init connection
         print 'Connecting to S3 bucket: %s with credentials from %s ...'\
               % (bucket_name, creds_path)
-        # Use individual session for each instance of DataSink
-        # Better when datasinks are being used in multi-threading, see:
+        # Better when being used in multi-threading, see:
         # http://boto3.readthedocs.org/en/latest/guide/resources.html#multithreading
         session = boto3.session.Session(aws_access_key_id=aws_access_key_id,
                                         aws_secret_access_key=aws_secret_access_key)
@@ -225,8 +224,4 @@ def return_rds_vars(creds_path):
     db_sid = row5.split('=')[1]
 
     # Return the DB variables
-    return db_user,\
-           db_passwd,\
-           db_host,\
-           db_port,\
-           db_sid
+    return db_user, db_passwd, db_host, db_port, db_sid
