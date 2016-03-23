@@ -15,7 +15,7 @@ pbs_template = \
 '''#! %(shell)s
 ## PBS batch file - %(timestamp)s
 #PBS -S %(shell)s
-#PBS -N cpac_run_%(job_name)s
+#PBS -N %(job_name)s
 #PBS -t 1-%(num_tasks)d
 #PBS -q %(queue)s
 #PBS -l nodes=1:ppn=%(cores_per_task)d
@@ -32,7 +32,7 @@ sge_template = \
 '''#! %(shell)s
 ## SGE batch file - %(timestamp)s
 #$ -S %(shell)s
-#$ -N cpac_run_%(job_name)s
+#$ -N %(job_name)s
 #$ -t 1-%(num_tasks)d
 #$ -q %(queue)s
 #$ -pe %(par_env)s %(cores_per_task)d
@@ -48,12 +48,13 @@ sge_template = '\n'.join([sge_template,
 slurm_template = \
 '''#! %(shell)s
 ## SLURM batch file - %(timestamp)s
-#SBATCH --job-name=cpac_run_%(job_name)s
+#SBATCH --job-name=%(job_name)s
 #SBATCH --array=1-%(num_tasks)d
 #SBATCH --cpus-per-task=%(cores_per_task)d
 #SBATCH --uid=%(user)s
 #SBATCH --get-user-env
 #SBATCH --workdir=%(work_dir)s
+#SBATCH --time=%(time_limit)s
 '''
 # Add in start, run_cmd, end
 slurm_template = '\n'.join([slurm_template,
