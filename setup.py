@@ -14,7 +14,7 @@ from setuptools import find_packages, setup
 
 # Use disutils' setup function to install the package
 setup(name='INDI-Tools',
-      version='0.0.5',
+      version='0.0.6',
       description='Python utilities developed by FCP-INDI',
       author='Daniel Clark',
       author_email='daniel.clark@childmind.org',
