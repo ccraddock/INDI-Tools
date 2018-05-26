@@ -85,7 +85,7 @@ def return_bucket(creds_path, bucket_name):
         raise Exception(err_msg)
 
     # Try and get AWS credentials if a creds_path is specified
-    if creds_path:
+    if creds_path and creds_path != 'anon':
         try:
             aws_access_key_id, aws_secret_access_key = \
                 return_aws_keys(creds_path)
@@ -103,13 +103,16 @@ def return_bucket(creds_path, bucket_name):
                                         aws_secret_access_key=aws_secret_access_key)
         s3_resource = session.resource('s3', use_ssl=True)
 
-    # Otherwise, connect anonymously
+    # see if BOTO3 can find credentials in the environment somehow or connect anonymously
     else:
-        print 'Connecting to AWS: %s anonymously...' % bucket_name
+        print 'Connecting to AWS: %s using environment configuration ...' % bucket_name
         session = boto3.session.Session()
         s3_resource = session.resource('s3', use_ssl=True)
-        s3_resource.meta.client.meta.events.register('choose-signer.s3.*',
-                                                     botocore.handlers.disable_signing)
+
+        if creds_path == 'anon':
+            print 'Making S3 connection to %s anonymous ...' % bucket_name
+            s3_resource.meta.client.meta.events.register('choose-signer.s3.*', 
+                botocore.handlers.disable_signing)
 
     # Explicitly declare a secure SSL connection for bucket object
     bucket = s3_resource.Bucket(bucket_name)
